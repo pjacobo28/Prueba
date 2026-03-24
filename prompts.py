@@ -1,6 +1,7 @@
 """
-Prompts for Claude AI in Google Drive Organizer
+Prompts for Google Gemini AI in Google Drive Organizer
 """
+import json
 
 SYSTEM_PROMPT = """Eres un asistente de organización de Google Drive muy inteligente y útil.
 Tu objetivo es ayudar a organizar documentos analizándolos cuidadosamente.

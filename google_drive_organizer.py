@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Google Drive Organizer with AI
-Organiza automáticamente tu Google Drive usando Claude AI para análisis inteligente
+Organiza automáticamente tu Google Drive usando Google Gemini AI para análisis inteligente
 """
 
 import os
@@ -15,7 +15,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.exceptions import RefreshError
 import google.auth
 from googleapiclient.discovery import build
-from anthropic import Anthropic
+import google.generativeai as genai
 from prompts import SYSTEM_PROMPT, get_analysis_prompt
 
 # Google Drive API scope
@@ -24,10 +24,11 @@ SCOPES = ["https://www.googleapis.com/auth/drive"]
 
 class GoogleDriveOrganizer:
     def __init__(self, credentials_file: str = "credentials.json"):
-        """Initialize the organizer with Google Drive and Claude API access"""
+        """Initialize the organizer with Google Drive and Gemini API access"""
         self.credentials_file = credentials_file
         self.drive_service = self._authenticate_drive()
-        self.anthropic = Anthropic()
+        genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
+        self.model = genai.GenerativeModel('gemini-1.5-flash')
         self.conversation_history = []
 
     def _authenticate_drive(self):
@@ -114,7 +115,7 @@ class GoogleDriveOrganizer:
             return None
 
     def analyze_file_with_claude(self, file_info: dict) -> dict:
-        """Use Claude to analyze a file and suggest organization"""
+        """Use Gemini to analyze a file and suggest organization"""
         file_id = file_info.get("id")
         file_name = file_info.get("name", "Unknown")
         mime_type = file_info.get("mimeType")
@@ -124,25 +125,12 @@ class GoogleDriveOrganizer:
 
         prompt = get_analysis_prompt(file_name, mime_type, content_preview)
 
-        # Add to conversation for context
-        self.conversation_history.append({
-            "role": "user",
-            "content": prompt
-        })
+        # Combine system prompt with analysis prompt for Gemini
+        full_prompt = f"{SYSTEM_PROMPT}\n\n{prompt}"
 
-        # Get Claude analysis
-        response = self.anthropic.messages.create(
-            model="claude-3-5-sonnet-20241022",
-            max_tokens=1000,
-            system=SYSTEM_PROMPT,
-            messages=self.conversation_history
-        )
-
-        analysis_text = response.content[0].text
-        self.conversation_history.append({
-            "role": "assistant",
-            "content": analysis_text
-        })
+        # Get Gemini analysis
+        response = self.model.generate_content(full_prompt)
+        analysis_text = response.text
 
         return {
             "file_id": file_id,
@@ -156,7 +144,7 @@ class GoogleDriveOrganizer:
         print("\n" + "="*80)
         print(f"Archivo: {analysis['file_name']}")
         print("-"*80)
-        print(f"Análisis de Claude:")
+        print(f"Análisis de Gemini:")
         print(analysis["analysis"])
         print("-"*80)
 
