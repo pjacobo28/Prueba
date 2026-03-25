@@ -15,7 +15,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.exceptions import RefreshError
 import google.auth
 from googleapiclient.discovery import build
-import google.generativeai as genai
+import google.genai
 from prompts import SYSTEM_PROMPT, get_analysis_prompt
 
 # Google Drive API scope
@@ -27,8 +27,7 @@ class GoogleDriveOrganizer:
         """Initialize the organizer with Google Drive and Gemini API access"""
         self.credentials_file = credentials_file
         self.drive_service = self._authenticate_drive()
-        genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
-        self.model = genai.GenerativeModel('gemini-1.5-flash')
+        self.client = google.genai.Client(api_key=os.environ.get("GOOGLE_API_KEY"))
         self.conversation_history = []
 
     def _authenticate_drive(self):
@@ -114,7 +113,7 @@ class GoogleDriveOrganizer:
             print(f"Error reading file: {e}")
             return None
 
-    def analyze_file_with_claude(self, file_info: dict) -> dict:
+    def analyze_file_with_gemini(self, file_info: dict) -> dict:
         """Use Gemini to analyze a file and suggest organization"""
         file_id = file_info.get("id")
         file_name = file_info.get("name", "Unknown")
@@ -128,8 +127,11 @@ class GoogleDriveOrganizer:
         # Combine system prompt with analysis prompt for Gemini
         full_prompt = f"{SYSTEM_PROMPT}\n\n{prompt}"
 
-        # Get Gemini analysis
-        response = self.model.generate_content(full_prompt)
+        # Get Gemini analysis using new API
+        response = self.client.models.generate_content(
+            model="gemini-2.0-flash",
+            contents=full_prompt
+        )
         analysis_text = response.text
 
         return {
@@ -233,8 +235,8 @@ class GoogleDriveOrganizer:
         for i, file_info in enumerate(files, 1):
             print(f"\n[{i}/{len(files)}] Analizando: {file_info['name']}")
 
-            # Analyze with Claude
-            analysis = self.analyze_file_with_claude(file_info)
+            # Analyze with Gemini
+            analysis = self.analyze_file_with_gemini(file_info)
 
             # Get user decision
             decision = self.ask_user_decision(analysis)
