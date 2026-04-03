@@ -238,9 +238,10 @@ app.get("/api/health", (req: any, res: any) => {
 // INICIO DE SERVIDOR Y SCHEDULER
 // ─────────────────────────────────────────────────────
 
-const PORT = process.env.PORT || 3000;
+const PORT = parseInt(process.env.PORT || "3000", 10);
+const HOST = process.env.HOST || "0.0.0.0";
 
-app.listen(PORT, async () => {
+app.listen(PORT, HOST, async () => {
   console.log(`\n🚀 SISTEMA COMPLETO INICIADO`);
   console.log(`📍 Dashboard: http://localhost:${PORT}`);
   console.log(`\n🔐 Credenciales por defecto:`);

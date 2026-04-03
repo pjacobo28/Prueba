@@ -1,0 +1,20 @@
+name: "CodeQL Security Analysis Config"
+
+# Excluir archivos con dependencias opcionales
+paths-ignore:
+  - src/services/expediente-scraper.ts
+  - node_modules
+  - dist
+  - coverage
+  - tests
+
+# Excluir patrones
+path-excludes:
+  - "**/*.d.ts"
+  - "**/__tests__/**"
+  - "**/node_modules/**"
+  - "**/dist/**"
+
+# Solo analizar código TypeScript y JavaScript
+queries:
+  - uses: security-and-quality
