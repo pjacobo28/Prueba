@@ -13,6 +13,13 @@
         "-y",
         "@superpowers/mcp-server"
       ]
+    },
+    "code-review": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@code-review/mcp-server"
+      ]
     }
   }
 }
