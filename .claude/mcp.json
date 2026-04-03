@@ -76,6 +76,13 @@
         "-y",
         "@playwright/mcp-server"
       ]
+    },
+    "claude-md-management": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@claude-md-management/mcp-server"
+      ]
     }
   }
 }

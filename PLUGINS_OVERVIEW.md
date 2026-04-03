@@ -2,7 +2,7 @@
 
 ## 📋 Resumen de Plugins
 
-Tu entorno Claude Code ahora tiene **11 plugins profesionales** especializados para trabajo legal:
+Tu entorno Claude Code ahora tiene **12 plugins profesionales** especializados para trabajo legal:
 
 ### Plugins de Desarrollo (Metodología)
 - **Context7** - Documentación actualizada
@@ -22,6 +22,9 @@ Tu entorno Claude Code ahora tiene **11 plugins profesionales** especializados p
 
 ### Plugins de Automatización Web
 - **Playwright** - Automatización de navegadores y web scraping judicial
+
+### Plugins de Documentación
+- **Claude MD Management** - Gestión inteligente de documentación Markdown
 
 ---
 
@@ -122,6 +125,32 @@ Knowledge Base (indexa)
 Legal Research (busca en repositorio)
     ↓
 Jurisprudencia actualizada diariamente
+```
+
+### Workflow 7: Base de Conocimiento Centralizada
+
+```
+Procedimientos legales
+    ↓
+Claude MD Management (/create-md-document)
+    ↓
+Estructura jerárquica
+    ↓
+/organize-documentation
+    ↓
+Vinculación de temas
+    ↓
+/link-documents
+    ↓
+Generación de índices
+    ↓
+/generate-index
+    ↓
+Base de conocimiento completa
+    ├── Accesible para equipo
+    ├── Referencia rápida
+    ├── Versionado en Git
+    └── Exportable (HTML, PDF, Word)
 ```
 
 ---
