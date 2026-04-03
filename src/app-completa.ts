@@ -239,9 +239,14 @@ app.get("/api/health", (req: any, res: any) => {
 // ─────────────────────────────────────────────────────
 
 const PORT = parseInt(process.env.PORT || "3000", 10);
-app.listen(PORT, '127.0.0.1', () => {
+
+// Forzar binding a todas las interfaces
+const server = app.listen(PORT, "0.0.0.0", () => {
   console.log(`\n🚀 SISTEMA COMPLETO INICIADO`);
-  console.log(`📍 Dashboard: http://127.0.0.1:${PORT}`);
+  console.log(`📍 Dashboard accesible en:`);
+  console.log(`   - http://localhost:${PORT}`);
+  console.log(`   - http://192.0.2.2:${PORT}`);
+  console.log(`   - http://0.0.0.0:${PORT}`);
   console.log(`\n🔐 Credenciales por defecto:`);
   console.log(`   Email: admin@expedientes.com`);
   console.log(`   Password: admin123`);
