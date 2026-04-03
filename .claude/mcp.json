@@ -20,6 +20,48 @@
         "-y",
         "@code-review/mcp-server"
       ]
+    },
+    "document-analysis": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@document-analysis/mcp-server"
+      ]
+    },
+    "pdf-processor": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@pdf-processor/mcp-server"
+      ]
+    },
+    "legal-research": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@legal-research/mcp-server"
+      ]
+    },
+    "legal-writing": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@legal-writing/mcp-server"
+      ]
+    },
+    "data-automation": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@data-automation/mcp-server"
+      ]
+    },
+    "knowledge-base": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@knowledge-base/mcp-server"
+      ]
     }
   }
 }
