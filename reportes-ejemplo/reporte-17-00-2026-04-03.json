@@ -1,0 +1,50 @@
+{
+  "id": "REPORTE-1775185139213",
+  "fecha": "2026-04-03T02:58:59.213Z",
+  "horaGeneracion": "17:00",
+  "expedientes": [
+    {
+      "numeroExpediente": "2024-00001-00-01-00-JCL-001-001",
+      "caratula": "Juan Pérez VS Empresa XYZ S.A. - Despido Injustificado",
+      "estado": "activo",
+      "ultimoMovimiento": {
+        "tipo": "audiencia_celebrada",
+        "descripcion": "Celebrada audiencia de conciliación",
+        "fecha": "2024-04-01T00:00:00.000Z",
+        "diasDesdeUltimo": 732
+      },
+      "proximaAudiencia": "2024-04-20T00:00:00.000Z"
+    },
+    {
+      "numeroExpediente": "2024-00002-00-02-00-JCC-001-001",
+      "caratula": "Empresa ABC Corp VS Carlos López Núñez - Incumplimiento de Contrato",
+      "estado": "activo",
+      "ultimoMovimiento": {
+        "tipo": "traslado",
+        "descripcion": "Se traslada a demandado para que comparezca",
+        "fecha": "2024-03-28T00:00:00.000Z",
+        "diasDesdeUltimo": 736
+      },
+      "proximaAudiencia": "2024-04-25T00:00:00.000Z"
+    },
+    {
+      "numeroExpediente": "2024-00003-00-03-00-JPE-001-001",
+      "caratula": "María González VS Juan Sánchez - Pensión Alimenticia",
+      "estado": "resuelto",
+      "ultimoMovimiento": {
+        "tipo": "sentencia",
+        "descripcion": "Sentencia que condena al demandado al pago de pensión",
+        "fecha": "2024-03-15T00:00:00.000Z",
+        "diasDesdeUltimo": 749
+      }
+    }
+  ],
+  "resumen": {
+    "totalExpedientes": 3,
+    "expedientesActivos": 2,
+    "expedientesResueltos": 1,
+    "movimientosHoy": 0,
+    "expedientesConMovimientoReciente": 0
+  },
+  "generadoPor": "Sistema Automático de Monitoreo"
+}

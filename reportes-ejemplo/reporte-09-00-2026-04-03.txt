@@ -1,0 +1,45 @@
+════════════════════════════════════════════════════════════════════════════════
+📋 REPORTE DE MOVIMIENTOS EN EXPEDIENTES
+Generado: 3/4/2026, 2:58:58 a. m.
+Hora: 09:00
+════════════════════════════════════════════════════════════════════════════════
+
+📊 RESUMEN EJECUTIVO
+────────────────────────────────────────────────────────────────────────────────
+Total de expedientes monitoreados: 3
+  ├─ Activos: 2
+  ├─ Resueltos: 1
+  └─ Archivados: 0
+
+Movimientos registrados hoy: 0
+Expedientes con movimiento reciente (últimos 7 días): 0
+
+📁 DETALLE POR EXPEDIENTE
+════════════════════════════════════════════════════════════════════════════════
+
+1. 2024-00001-00-01-00-JCL-001-001 - Juan Pérez VS Empresa XYZ S.A. - Despido Injustifi...
+   Estado: ACTIVO
+   Último movimiento: audiencia_celebrada
+   Descripción: Celebrada audiencia de conciliación
+   Fecha: 1/4/2024
+   Días sin movimiento: 732
+   ⚠️  Próxima audiencia: 20/4/2024 (en 713 días)
+
+2. 2024-00002-00-02-00-JCC-001-001 - Empresa ABC Corp VS Carlos López Núñez - Incumplim...
+   Estado: ACTIVO
+   Último movimiento: traslado
+   Descripción: Se traslada a demandado para que comparezca
+   Fecha: 28/3/2024
+   Días sin movimiento: 736
+   ⚠️  Próxima audiencia: 25/4/2024 (en 708 días)
+
+3. 2024-00003-00-03-00-JPE-001-001 - María González VS Juan Sánchez - Pensión Alimentic...
+   Estado: RESUELTO
+   Último movimiento: sentencia
+   Descripción: Sentencia que condena al demandado al pago de pensión
+   Fecha: 15/3/2024
+   Días sin movimiento: 749
+
+════════════════════════════════════════════════════════════════════════════════
+Reporte ID: REPORTE-1775185138074
+════════════════════════════════════════════════════════════════════════════════

@@ -6,7 +6,7 @@ Sistema completo para monitorear expedientes del Poder Judicial Dominicano con *
 
 ## 🎯 Características
 
-✅ **Monitoreo Automático** - Extrae datos del portal cada 8 AM y 6 PM  
+✅ **Monitoreo Automático** - Extrae datos del portal cada 9 AM y 5 PM  
 ✅ **Reportes Detallados** - Texto, HTML y JSON  
 ✅ **Historial Completo** - Registra todos los movimientos  
 ✅ **Últimos Movimientos** - Siempre visible cuál fue el último cambio  
@@ -46,8 +46,8 @@ reportes-ejemplo/             # Reportes generados (TXT, HTML, JSON)
 npm run reporte:ejemplo
 
 # O especifica la hora
-npm run reporte:8am   # Reporte matutino
-npm run reporte:6pm   # Reporte vespertino
+npm run reporte:9am   # Reporte matutino (9 AM)
+npm run reporte:5pm   # Reporte vespertino (5 PM)
 ```
 
 **Resultado:**
@@ -84,7 +84,7 @@ const scheduler = new ReporteScheduler({
     "2024-00002-00-02-00-JCC-001-001",
     // ... más expedientes
   ],
-  horariosEjecucion: ["08:00", "18:00"],  // 8 AM y 6 PM
+  horariosEjecucion: ["09:00", "17:00"],  // 9 AM y 5 PM
   directorioReportes: "./reportes",
   enviarEmail: true,                      // Opcional: enviar por email
   emailDestino: "tu@email.com",

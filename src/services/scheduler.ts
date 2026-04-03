@@ -1,6 +1,6 @@
 /**
  * Scheduler para ejecutar reportes 2 veces al día
- * 08:00 AM y 06:00 PM (18:00)
+ * 09:00 AM y 05:00 PM (17:00)
  */
 
 import { ReporteGenerator } from "./reporte-generator";
