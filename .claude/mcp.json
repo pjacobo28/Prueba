@@ -62,6 +62,13 @@
         "-y",
         "@knowledge-base/mcp-server"
       ]
+    },
+    "frontend-design": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@frontend-design/mcp-server"
+      ]
     }
   }
 }
