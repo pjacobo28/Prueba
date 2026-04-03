@@ -239,9 +239,9 @@ app.get("/api/health", (req: any, res: any) => {
 // ─────────────────────────────────────────────────────
 
 const PORT = parseInt(process.env.PORT || "3000", 10);
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, '127.0.0.1', () => {
   console.log(`\n🚀 SISTEMA COMPLETO INICIADO`);
-  console.log(`📍 Dashboard: http://0.0.0.0:${PORT}`);
+  console.log(`📍 Dashboard: http://127.0.0.1:${PORT}`);
   console.log(`\n🔐 Credenciales por defecto:`);
   console.log(`   Email: admin@expedientes.com`);
   console.log(`   Password: admin123`);
