@@ -5,9 +5,21 @@
  * Extrae información de expedientes y movimientos
  */
 
-// @ts-ignore - Playwright is an optional dependency for web scraping
-import { Browser, Page, chromium } from "playwright";
 import { Expediente, Movimiento, TipoMovimiento } from "../types/expediente";
+
+// @ts-ignore - Playwright is an optional dependency for web scraping
+let chromium: any = null;
+let Browser: any = null;
+let Page: any = null;
+
+try {
+  const pw = require("playwright");
+  chromium = pw.chromium;
+  Browser = pw.Browser;
+  Page = pw.Page;
+} catch (e) {
+  console.warn("⚠️  Playwright no instalado. Scraping deshabilitado.");
+}
 
 export interface ScraperConfig {
   usuario: string;
@@ -16,8 +28,8 @@ export interface ScraperConfig {
 }
 
 export class ExpedienteScraper {
-  private browser?: Browser;
-  private page?: Page;
+  private browser?: any;
+  private page?: any;
   private config: ScraperConfig;
 
   constructor(config: ScraperConfig) {
@@ -31,6 +43,10 @@ export class ExpedienteScraper {
    * Inicia el navegador y realiza login
    */
   async iniciar(): Promise<void> {
+    if (!chromium) {
+      throw new Error("Playwright no está instalado. Instala con: npm install playwright");
+    }
+
     console.log("🚀 Iniciando navegador...");
     this.browser = await chromium.launch({
       headless: this.config.headless,

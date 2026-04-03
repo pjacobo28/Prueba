@@ -4,11 +4,17 @@
  */
 
 import { ReporteGenerator } from "./reporte-generator";
-import { ExpedienteScraper } from "./expediente-scraper";
 import { DatabaseService, inicializarDB } from "./database";
 import { Expediente } from "../types/expediente";
 import * as fs from "fs/promises";
 import * as path from "path";
+
+let ExpedienteScraper: any = null;
+try {
+  ExpedienteScraper = require("./expediente-scraper").ExpedienteScraper;
+} catch (e) {
+  console.warn("⚠️  Scraper no disponible (Playwright no instalado)");
+}
 
 export interface SchedulerDBConfig {
   usuario: string;
@@ -108,37 +114,47 @@ export class ReporteSchedulerConDB {
    */
   private async ejecutar(horario: string): Promise<void> {
     try {
-      // Extraer expedientes
-      console.log("📥 Extrayendo expedientes del portal...");
-      const scraper = new ExpedienteScraper({
-        usuario: this.config.usuario,
-        contrasena: this.config.contrasena,
-        headless: true,
-      });
-
       let expedientes: Expediente[] = [];
 
-      try {
-        await scraper.iniciar();
-        const resultados = await scraper.buscarMuchosExpedientes(
-          this.config.expedientes
-        );
-        expedientes = resultados.filter((r) => r !== null) as Expediente[];
+      // Intentar extraer del portal si Playwright está disponible
+      if (ExpedienteScraper) {
+        try {
+          console.log("📥 Extrayendo expedientes del portal...");
+          const scraper = new ExpedienteScraper({
+            usuario: this.config.usuario,
+            contrasena: this.config.contrasena,
+            headless: true,
+          });
 
-        // Guardar en BD
-        for (const exp of expedientes) {
-          this.db.guardarExpediente(exp);
-          this.db.guardarMovimientos(exp.numeroExpediente, exp.movimientos);
-          this.expedientesGuardados.set(exp.numeroExpediente, exp);
+          try {
+            await scraper.iniciar();
+            const resultados = await scraper.buscarMuchosExpedientes(
+              this.config.expedientes
+            );
+            expedientes = resultados.filter((r: any) => r !== null) as Expediente[];
+
+            // Guardar en BD
+            for (const exp of expedientes) {
+              this.db.guardarExpediente(exp);
+              this.db.guardarMovimientos(exp.numeroExpediente, exp.movimientos);
+              this.expedientesGuardados.set(exp.numeroExpediente, exp);
+            }
+
+            console.log(`✅ ${expedientes.length} expedientes guardados en BD`);
+          } catch (error) {
+            console.error("⚠️  Error extrayendo del portal:", error);
+            expedientes = Array.from(this.expedientesGuardados.values());
+            console.log(`📦 Usando ${expedientes.length} expedientes del caché`);
+          } finally {
+            await scraper.cerrar();
+          }
+        } catch (error) {
+          console.warn("⚠️  Scraper no disponible:", error);
+          expedientes = Array.from(this.expedientesGuardados.values());
         }
-
-        console.log(`✅ ${expedientes.length} expedientes guardados en BD`);
-      } catch (error) {
-        console.error("⚠️  Error extrayendo del portal:", error);
+      } else {
+        console.log("ℹ️  Usando expedientes del caché (Playwright no instalado)");
         expedientes = Array.from(this.expedientesGuardados.values());
-        console.log(`📦 Usando ${expedientes.length} expedientes del caché`);
-      } finally {
-        await scraper.cerrar();
       }
 
       if (expedientes.length === 0) {
