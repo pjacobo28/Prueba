@@ -6,6 +6,13 @@
         "-y",
         "@context7/mcp-server"
       ]
+    },
+    "superpowers": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@superpowers/mcp-server"
+      ]
     }
   }
 }
