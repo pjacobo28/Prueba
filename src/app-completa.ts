@@ -33,11 +33,19 @@ const notifications = inicializarNotifications();
 const verificarToken = (req: any, res: any, next: any) => {
   const token = req.headers.authorization?.replace("Bearer ", "");
 
-  if (!token && !req.path.startsWith("/login") && !req.path.startsWith("/register")) {
-    // Permitir acceso público a páginas pero restringir API
-    if (req.path.startsWith("/api/")) {
-      return res.status(401).json({ error: "Token requerido" });
-    }
+  // Rutas públicas que no requieren token
+  const rutasPublicas = [
+    "/api/auth/login",
+    "/api/auth/register",
+    "/",
+    "/index.html",
+  ];
+
+  const esRutaPublica = rutasPublicas.some(ruta => req.path === ruta || req.path.startsWith(ruta));
+
+  // Si es API y no es ruta pública, requiere token
+  if (req.path.startsWith("/api/") && !esRutaPublica && !token) {
+    return res.status(401).json({ error: "Token requerido" });
   }
 
   if (token) {
