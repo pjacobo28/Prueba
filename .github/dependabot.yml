@@ -1,0 +1,95 @@
+version: 2
+
+# ============================================================
+# NPM PACKAGE UPDATES
+# ============================================================
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "03:00"
+      timezone: "America/Santiago"
+
+    # Grouping strategy
+    groups:
+      production:
+        dependency-type: "production"
+      development:
+        dependency-type: "development"
+
+    # Auto-merge configuration
+    auto-merge:
+      - match:
+          dependency-type: "development"
+          update-types:
+            - "minor"
+            - "patch"
+      - match:
+          dependency-type: "production"
+          update-types:
+            - "patch"
+
+    # Pull request settings
+    pull-request-branch-name:
+      separator: "/"
+
+    rebase-strategy: "auto"
+    commit-message:
+      prefix: "chore(deps)"
+      prefix-development: "chore(deps-dev)"
+      include: "scope"
+
+    # Security
+    ignore:
+      - dependency-name: "lodash"
+        versions: ["4.17.20"]
+
+    allow:
+      - dependency-type: "all"
+
+    reviewers:
+      - "pjacobo28"
+
+    assignees:
+      - "pjacobo28"
+
+    labels:
+      - "dependencies"
+      - "npm"
+
+    milestone: 1
+
+# ============================================================
+# GITHUB ACTIONS UPDATES
+# ============================================================
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "03:30"
+      timezone: "America/Santiago"
+
+    groups:
+      actions:
+        dependency-type: "all"
+
+    auto-merge:
+      - match:
+          dependency-type: "all"
+          update-types:
+            - "minor"
+            - "patch"
+
+    reviewers:
+      - "pjacobo28"
+
+    labels:
+      - "github-actions"
+      - "automation"
+
+    commit-message:
+      prefix: "ci(actions)"
+      include: "scope"

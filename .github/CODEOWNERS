@@ -1,0 +1,28 @@
+# CODEOWNERS - Automatic code review assignment
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owners for everything
+* @pjacobo28
+
+# Legal domain types
+/src/types/legal.ts @pjacobo28
+
+# Security validators
+/src/security/validators.ts @pjacobo28
+
+# API implementation
+/src/api/api.ts @pjacobo28
+
+# Tests
+/tests/ @pjacobo28
+
+# Documentation
+/SECURITY_POLICY.md @pjacobo28
+/SECURITY_AUDIT.md @pjacobo28
+/*.md @pjacobo28
+
+# Configuration
+/package.json @pjacobo28
+/tsconfig.json @pjacobo28
+/jest.config.js @pjacobo28
+/.github/ @pjacobo28

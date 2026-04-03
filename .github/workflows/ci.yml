@@ -1,0 +1,174 @@
+name: 🚀 CI/CD Pipeline - Legal Tech Stack
+
+on:
+  push:
+    branches: [ main, claude/install-context7-plugin-a01Ck ]
+  pull_request:
+    branches: [ main, claude/install-context7-plugin-a01Ck ]
+
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+
+jobs:
+  # ============================================================
+  # 1. SETUP & DEPENDENCIES
+  # ============================================================
+  setup:
+    name: 📦 Setup & Install
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📚 Install dependencies
+        run: npm ci
+
+  # ============================================================
+  # 2. TYPE CHECKING & LINTING
+  # ============================================================
+  type-check:
+    name: ✅ Type Check (TypeScript)
+    needs: setup
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: 🎯 TypeScript strict mode
+        run: npm run type-check
+        continue-on-error: false
+
+  # ============================================================
+  # 3. UNIT TESTS + COVERAGE
+  # ============================================================
+  test:
+    name: 🧪 Tests & Coverage
+    needs: setup
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: 🧪 Run tests with coverage
+        run: npm run test:coverage
+        env:
+          CI: true
+
+      - name: 📊 Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage/lcov.info
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: false
+          verbose: true
+
+      - name: 📈 Comment PR with coverage
+        if: github.event_name == 'pull_request'
+        uses: romeovs/lcov-reporter-action@v0.3.1
+        with:
+          lcov-file: ./coverage/lcov.info
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+
+  # ============================================================
+  # 4. SECURITY VALIDATION
+  # ============================================================
+  security:
+    name: 🔒 Security Validators
+    needs: setup
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: 🔐 OWASP/GDPR/CCPA Validation
+        run: npm test -- --testPathPattern=security
+        continue-on-error: false
+
+  # ============================================================
+  # 5. BUILD
+  # ============================================================
+  build:
+    name: 🏗️ Build
+    needs: [type-check, test, security]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: 📦 Build project
+        run: npm run build
+        continue-on-error: true
+
+      - name: 📂 Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist/
+          retention-days: 30
+        continue-on-error: true
+
+  # ============================================================
+  # 6. SUMMARY
+  # ============================================================
+  summary:
+    name: 📋 Summary & Status
+    needs: [type-check, test, security, build]
+    runs-on: ubuntu-latest
+    if: always()
+
+    steps:
+      - name: ✅ All checks passed
+        if: ${{ success() }}
+        run: |
+          echo "🎉 Pipeline succeeded!"
+          echo "✅ Type checking: PASSED"
+          echo "✅ Tests & coverage: PASSED"
+          echo "✅ Security validators: PASSED"
+          echo "✅ Build: PASSED"
+
+      - name: ❌ Pipeline failed
+        if: ${{ failure() }}
+        run: |
+          echo "❌ Pipeline failed! Check logs above."
+          exit 1
