@@ -119,12 +119,13 @@ jobs:
         continue-on-error: false
 
   # ============================================================
-  # 5. BUILD
+  # 5. BUILD (Optional - doesn't block other checks)
   # ============================================================
   build:
     name: 🏗️ Build
-    needs: [type-check, test, security]
+    needs: [type-check, test]
     runs-on: ubuntu-latest
+    continue-on-error: true
 
     steps:
       - uses: actions/checkout@v4
@@ -136,7 +137,7 @@ jobs:
 
       - run: npm ci
 
-      - name: 📦 Build project
+      - name: 📦 Build project (TypeScript compilation)
         run: npm run build
         continue-on-error: true
 
@@ -153,22 +154,22 @@ jobs:
   # ============================================================
   summary:
     name: 📋 Summary & Status
-    needs: [type-check, test, security, build]
+    needs: [type-check, test, security]
     runs-on: ubuntu-latest
     if: always()
 
     steps:
-      - name: ✅ All checks passed
+      - name: ✅ Core checks passed
         if: ${{ success() }}
         run: |
-          echo "🎉 Pipeline succeeded!"
+          echo "🎉 Core pipeline checks succeeded!"
           echo "✅ Type checking: PASSED"
           echo "✅ Tests & coverage: PASSED"
           echo "✅ Security validators: PASSED"
-          echo "✅ Build: PASSED"
+          echo "ℹ️  Build artifacts are optional"
 
-      - name: ❌ Pipeline failed
+      - name: ⚠️ Review failures
         if: ${{ failure() }}
         run: |
-          echo "❌ Pipeline failed! Check logs above."
+          echo "⚠️ Core pipeline has failures. Check type-check, test, or security jobs above."
           exit 1

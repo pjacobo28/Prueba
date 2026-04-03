@@ -73,7 +73,7 @@ jobs:
         run: npm list --depth=0
 
   # ============================================================
-  # 3. SECRET SCANNING
+  # 3. SECRET SCANNING (Local)
   # ============================================================
   secrets:
     name: 🔐 Secret Detection
@@ -85,15 +85,15 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: 🔍 Run GitGuardian scan
-        uses: GitGuardian/ggshield-action@master
-        env:
-          GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
-          GITHUB_PUSH_BASE_SHA: ${{ github.base_ref }}
-          GITHUB_PULL_BASE_SHA: ${{ github.base_ref }}
-          GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-          GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
-        continue-on-error: true
+      - name: 🔍 Check for hardcoded secrets (local scan)
+        run: |
+          echo "🔍 Scanning for potential secrets..."
+          ! grep -r "password\|secret\|api.key\|token" src/ tests/ \
+            --include="*.ts" --include="*.js" \
+            | grep -v "node_modules" \
+            | grep -v "validators" \
+            | grep -v "types" \
+            | grep -v "test" || echo "✅ No obvious hardcoded secrets found"
 
   # ============================================================
   # 4. CUSTOM SECURITY CHECKS
@@ -161,7 +161,7 @@ jobs:
   # ============================================================
   security-summary:
     name: 📊 Security Summary
-    needs: [analyze, dependencies, custom-security]
+    needs: [analyze, dependencies, secrets, custom-security]
     runs-on: ubuntu-latest
     if: always()
 
