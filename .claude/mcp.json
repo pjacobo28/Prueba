@@ -83,6 +83,41 @@
         "-y",
         "@claude-md-management/mcp-server"
       ]
+    },
+    "typescript-lsp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@typescript-lsp/mcp-server"
+      ]
+    },
+    "jest-testing": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@jest-testing/mcp-server"
+      ]
+    },
+    "owasp-security": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@owasp-security/mcp-server"
+      ]
+    },
+    "sentry-monitoring": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@sentry-monitoring/mcp-server"
+      ]
+    },
+    "api-management": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@api-management/mcp-server"
+      ]
     }
   }
 }
