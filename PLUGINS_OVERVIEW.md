@@ -2,7 +2,7 @@
 
 ## 📋 Resumen de Plugins
 
-Tu entorno Claude Code ahora tiene **10 plugins profesionales** especializados para trabajo legal:
+Tu entorno Claude Code ahora tiene **11 plugins profesionales** especializados para trabajo legal:
 
 ### Plugins de Desarrollo (Metodología)
 - **Context7** - Documentación actualizada
@@ -19,6 +19,9 @@ Tu entorno Claude Code ahora tiene **10 plugins profesionales** especializados p
 
 ### Plugins de Interfaz (Visualización)
 - **Frontend Design** - Diseño de interfaces y dashboards legales
+
+### Plugins de Automatización Web
+- **Playwright** - Automatización de navegadores y web scraping judicial
 
 ---
 
@@ -99,6 +102,26 @@ Dashboard ejecutivo para tu equipo
     ├── Jurisprudencia relevante
     ├── Demandas en proceso
     └── Búsqueda integrada
+```
+
+### Workflow 6: Recopilación Automática de Jurisprudencia
+
+```
+Sitios judiciales web
+    ↓
+Playwright (/scrape-website)
+    ↓
+Extrae fallos y sentencias
+    ↓
+PDF Processor (convierte a PDF)
+    ↓
+Document Analysis (estructura datos)
+    ↓
+Knowledge Base (indexa)
+    ↓
+Legal Research (busca en repositorio)
+    ↓
+Jurisprudencia actualizada diariamente
 ```
 
 ---

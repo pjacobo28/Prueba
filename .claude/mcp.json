@@ -69,6 +69,13 @@
         "-y",
         "@frontend-design/mcp-server"
       ]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp-server"
+      ]
     }
   }
 }
