@@ -8,7 +8,10 @@
     "test:coverage": "jest --coverage",
     "type-check": "tsc --noEmit",
     "build": "tsc",
-    "dev": "ts-node src/index.ts"
+    "dev": "ts-node src/index.ts",
+    "reporte:ejemplo": "ts-node src/examples/reporte-ejemplo.ts",
+    "reporte:8am": "ts-node src/examples/reporte-ejemplo.ts 08:00",
+    "reporte:6pm": "ts-node src/examples/reporte-ejemplo.ts 18:00"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
