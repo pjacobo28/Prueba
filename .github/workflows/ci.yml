@@ -115,7 +115,7 @@ jobs:
       - run: npm ci
 
       - name: 🔐 OWASP/GDPR/CCPA Validation
-        run: npm test -- --testPathPattern=security
+        run: npm test -- --testPathPatterns=security
         continue-on-error: false
 
   # ============================================================

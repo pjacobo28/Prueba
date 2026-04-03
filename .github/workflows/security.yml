@@ -125,7 +125,7 @@ jobs:
           echo "✅ All validators active"
 
       - name: 🧪 Run Security Tests
-        run: npm test -- --testPathPattern=security
+        run: npm test -- --testPathPatterns=security
         continue-on-error: false
 
       - name: 📋 Check for hardcoded secrets
