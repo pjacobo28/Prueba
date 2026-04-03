@@ -23,12 +23,12 @@ export class PDFGenerator {
   /**
    * Genera un reporte de expediente en PDF
    */
-  generarReporteExpediente(expediente: Expediente): string {
+  async generarReporteExpediente(expediente: Expediente): Promise<string> {
     const filename = `expediente-${expediente.numeroExpediente.replace(/\//g, "-")}.pdf`;
     const filepath = path.join(this.outputPath, filename);
 
     this.doc = new PDFDocument({
-      margins: 50,
+      margins: { top: 50, bottom: 50, left: 50, right: 50 },
       size: "A4",
     });
 
@@ -117,16 +117,16 @@ export class PDFGenerator {
   /**
    * Genera un reporte de estadísticas
    */
-  generarReporteEstadisticas(
+  async generarReporteEstadisticas(
     stats: any,
     expedientes: Expediente[],
     fecha: Date
-  ): string {
+  ): Promise<string> {
     const filename = `estadisticas-${fecha.toISOString().split("T")[0]}.pdf`;
     const filepath = path.join(this.outputPath, filename);
 
     this.doc = new PDFDocument({
-      margins: 50,
+      margins: { top: 50, bottom: 50, left: 50, right: 50 },
       size: "A4",
     });
 
