@@ -12,10 +12,14 @@
     "reporte:ejemplo": "ts-node src/examples/reporte-ejemplo.ts",
     "reporte:9am": "ts-node src/examples/reporte-ejemplo.ts 09:00",
     "reporte:5pm": "ts-node src/examples/reporte-ejemplo.ts 17:00",
-    "demo:db": "ts-node src/examples/demo-database.ts"
+    "demo:db": "ts-node src/examples/demo-database.ts",
+    "dashboard": "ts-node src/server.ts",
+    "dashboard:build": "tsc && node dist/src/server.js"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.13",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
     "@types/jest": "^30.0.0",
     "@types/node": "^25.5.0",
     "jest": "^30.3.0",
@@ -24,6 +28,8 @@
     "typescript": "^6.0.2"
   },
   "dependencies": {
-    "better-sqlite3": "^12.8.0"
+    "better-sqlite3": "^12.8.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
   }
 }

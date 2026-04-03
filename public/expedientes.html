@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expedientes - Dashboard</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            color: #1a3a52;
+            margin-bottom: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+
+        .nav-links a:hover {
+            background: #764ba2;
+        }
+
+        .nav-links a.active {
+            background: #764ba2;
+        }
+
+        .filters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        .filter-group select,
+        .filter-group input {
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .filter-group select:focus,
+        .filter-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .content {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .table th {
+            background: #f3f4f6;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+            color: #374151;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .table td {
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 14px;
+        }
+
+        .table tr:hover {
+            background: #f9fafb;
+        }
+
+        .table a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .table a:hover {
+            text-decoration: underline;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge.activo { background: #d1fae5; color: #065f46; }
+        .badge.resuelto { background: #dbeafe; color: #1e40af; }
+        .badge.apelacion { background: #fef3c7; color: #92400e; }
+        .badge.archivado { background: #f3f4f6; color: #374151; }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .spinner {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .pagination {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .pagination button {
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pagination button:hover {
+            border-color: #667eea;
+            background: #f9fafb;
+        }
+
+        .pagination button.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📁 Expedientes</h1>
+            <div class="nav-links">
+                <a href="/">Inicio</a>
+                <a href="/expedientes" class="active">Expedientes</a>
+                <a href="/reportes">Reportes</a>
+                <a href="/estadisticas">Estadísticas</a>
+            </div>
+
+            <div class="filters">
+                <div class="filter-group">
+                    <label>Estado</label>
+                    <select id="filter-estado">
+                        <option value="">Todos</option>
+                        <option value="activo">Activos</option>
+                        <option value="resuelto">Resueltos</option>
+                        <option value="apelacion">Apelación</option>
+                        <option value="archivado">Archivados</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Buscar</label>
+                    <input type="text" id="filter-busca" placeholder="Número, caratula, demandante...">
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div id="expedientes-list">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    Cargando expedientes...
+                </div>
+            </div>
+            <div class="pagination" id="pagination"></div>
+        </div>
+    </div>
+
+    <script>
+        let todosExpedientes = [];
+        let expedientesFiltrados = [];
+        const porPagina = 20;
+        let paginaActual = 1;
+
+        async function cargarExpedientes(estado = '') {
+            try {
+                let url = '/api/expedientes';
+                if (estado) {
+                    url = `/api/expedientes/estado/${estado}`;
+                }
+
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data.exito) {
+                    todosExpedientes = data.datos || [];
+                    aplicarFiltros();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('expedientes-list').innerHTML =
+                    `<div style="color: red; padding: 20px;">Error cargando expedientes</div>`;
+            }
+        }
+
+        function aplicarFiltros() {
+            const estado = document.getElementById('filter-estado').value;
+            const busca = document.getElementById('filter-busca').value.toLowerCase();
+
+            expedientesFiltrados = todosExpedientes.filter(exp => {
+                const cumpleEstado = !estado || exp.estado === estado;
+                const cumpleBusca = !busca ||
+                    exp.numeroExpediente.toLowerCase().includes(busca) ||
+                    exp.caratula.toLowerCase().includes(busca) ||
+                    exp.demandante.toLowerCase().includes(busca) ||
+                    exp.demandado.toLowerCase().includes(busca);
+
+                return cumpleEstado && cumpleBusca;
+            });
+
+            paginaActual = 1;
+            mostrarPagina();
+        }
+
+        function mostrarPagina() {
+            const inicio = (paginaActual - 1) * porPagina;
+            const fin = inicio + porPagina;
+            const expedientes = expedientesFiltrados.slice(inicio, fin);
+
+            let html = `<table class="table"><thead><tr>
+                <th>Número</th>
+                <th>Caratula</th>
+                <th>Estado</th>
+                <th>Demandante</th>
+                <th>Demandado</th>
+                <th>Movimientos</th>
+            </tr></thead><tbody>`;
+
+            expedientes.forEach(exp => {
+                html += `<tr>
+                    <td><a href="/expediente/${encodeURIComponent(exp.numeroExpediente)}">${exp.numeroExpediente}</a></td>
+                    <td>${exp.caratula.substring(0, 50)}</td>
+                    <td><span class="badge ${exp.estado}">${exp.estado}</span></td>
+                    <td>${exp.demandante}</td>
+                    <td>${exp.demandado}</td>
+                    <td>${exp.movimientos}</td>
+                </tr>`;
+            });
+
+            html += `</tbody></table>`;
+            document.getElementById('expedientes-list').innerHTML = html;
+
+            mostrarPaginacion();
+        }
+
+        function mostrarPaginacion() {
+            const totalPaginas = Math.ceil(expedientesFiltrados.length / porPagina);
+            let html = '';
+
+            if (totalPaginas > 1) {
+                if (paginaActual > 1) {
+                    html += `<button onclick="irPagina(1)">« Primera</button>`;
+                    html += `<button onclick="irPagina(${paginaActual - 1})">‹ Anterior</button>`;
+                }
+
+                for (let i = 1; i <= totalPaginas; i++) {
+                    if (i === paginaActual) {
+                        html += `<button class="active">${i}</button>`;
+                    } else if (i <= paginaActual + 2 && i >= paginaActual - 2) {
+                        html += `<button onclick="irPagina(${i})">${i}</button>`;
+                    }
+                }
+
+                if (paginaActual < totalPaginas) {
+                    html += `<button onclick="irPagina(${paginaActual + 1})">Siguiente ›</button>`;
+                    html += `<button onclick="irPagina(${totalPaginas})">Última »</button>`;
+                }
+            }
+
+            document.getElementById('pagination').innerHTML = html;
+        }
+
+        function irPagina(numero) {
+            paginaActual = numero;
+            mostrarPagina();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Event listeners
+        document.getElementById('filter-estado').addEventListener('change', aplicarFiltros);
+        document.getElementById('filter-busca').addEventListener('input', aplicarFiltros);
+
+        // Cargar datos al abrir
+        cargarExpedientes();
+    </script>
+</body>
+</html>
