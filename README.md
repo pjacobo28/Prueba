@@ -1,6 +1,6 @@
 # Prueba
 
-Project with Claude Code plugins installed.
+Project with Claude Code plugins and skills installed.
 
 ## Plugins Installed
 
@@ -28,3 +28,21 @@ Complete software development workflow for coding agents.
 - **Composable Skills** - Set of reusable skills for common development tasks
 
 **Repository:** https://github.com/obra/superpowers
+
+### 3. Anthropic Skills
+Official Anthropic implementation of skills for Claude - a comprehensive library of pre-built skills for various tasks.
+
+**Available Skills (17):**
+- **Creative & Design**: algorithmic-art, brand-guidelines, canvas-design, frontend-design, slack-gif-creator, theme-factory
+- **Development & Technical**: claude-api, mcp-builder, skill-creator, webapp-testing, web-artifacts-builder
+- **Enterprise & Communication**: internal-comms, doc-coauthoring
+- **Document Skills**: docx, pdf, pptx, xlsx
+
+**Features:**
+- Pre-built skills for immediate use
+- Open source (Apache 2.0) + source-available document skills
+- Self-contained skills with instructions and metadata
+- Pattern reference for creating custom skills
+- Full agent skills standard specification
+
+**Repository:** https://github.com/anthropics/skills
