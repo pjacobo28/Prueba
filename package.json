@@ -1,0 +1,15 @@
+{
+  "name": "prueba",
+  "version": "1.0.0",
+  "description": "Prueba project with claude-mem plugin",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["claude", "memory", "plugin"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "claude-mem": "^12.1.5"
+  }
+}
