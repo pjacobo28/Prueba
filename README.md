@@ -96,15 +96,41 @@ Código Penal (arts. 1-483) + Ley 97-2025 (Código Procesal Penal).
 - Jurisprudencia pivotal: tipicidad, error de tipo, presunción inocencia, cosa juzgada, debido proceso
 - Cheatsheet de 7 defensas penales (elemento tipo, error, justificación, imputabilidad, prescripción, cosa juzgada)
 
+### 4. Jurisprudencia Dominicana
+Doctrina jurisprudencial SCJ y Tribunal Constitucional 2010-2025 (base ENJ Anuario 2022).
+
+**Doctrina Jurisprudencial Crítica (10 temas):**
+- **Actos Propios:** Principio de estoppel (SCJ 241/2020) — no actuar contradicatoriamente
+- **Buena Fe:** Presunción y principio rector (CC art. 1134, interpretación contra redactor)
+- **Cosa Juzgada:** Identidad partes, causa de pedir, petitorio, sentencia firme (SCJ 20/2021)
+- **Error de Derecho:** Causal de casación (aplicación errónea ley, omisión fundamentación)
+- **Responsabilidad Civil:** Contractual vs. extracontractual (art. 1382 CC), daño moral reconocido
+- **Embargos y Medidas Cautelares:** Requisitos, vicio notificación = nulidad (SCJ 241/2020, Sentencia 037-2024)
+- **Contratos:** Interpretación, imprevisión justifica rescisión, enriquecimiento injusto (SCJ 20/2021, 69/2019)
+- **Sucesión Hereditaria:** Orden sucesión ab intestato, legítima inviolable, validez testamento
+- **Derecho Registral:** Tracto sucesivo (Art. 31 Res. 788-2022), prioridad registral (SCJ-SS-24-0969)
+- **Cosa Nueva:** Hechos posteriores sentencia permiten nueva demanda
+
+**Características:**
+- 10 doctrinas jurisprudenciales con sentencias citadas (SCJ + TC)
+- Jurisprudencia por área: Penal (presunción inocencia, error tipo), Civil (plazo prescripción, nulidad)
+- 4 casos paradigmáticos con soluciones defensivas (embargo, tracto sucesivo, enriquecimiento, cosa nueva)
+- Tabla de jurisprudencia frecuente por materia (Registral, Embargos, Responsabilidad civil, Contratos, Sucesión)
+- Formato de cita CENDIJ con ejemplos prácticos
+- Búsqueda en CENDIJ: pasos, palabras clave, fuentes (Portal Poder Judicial)
+- Base documental: ENJ Anuario Jurisprudencia 2022, CENDIJ, Gaceta Judicial
+
 ## Estructura del Proyecto
 
 ```
 skills/
-  ├── derecho-civil-dominicano/          # Código Civil (4 libros)
+  ├── derecho-civil-dominicano/          # Código Civil (4 libros, 11KB)
   │   └── SKILL.md
-  ├── inmobiliario-dominicano/           # Ley 108-05 + Sistema Torrens
+  ├── inmobiliario-dominicano/           # Ley 108-05 + Sistema Torrens (15KB)
   │   └── SKILL.md
-  ├── derecho-penal-dominicano/          # Código Penal + CPP
+  ├── derecho-penal-dominicano/          # Código Penal + CPP (10KB)
+  │   └── SKILL.md
+  ├── jurisprudencia-dominicana/         # SCJ doctrina + TC (12KB)
   │   └── SKILL.md
   ├── ... (superpowers skills - 14)
   └── ... (anthropic skills reference)
@@ -130,3 +156,12 @@ Los skills se cargan automáticamente en Claude Code. Menciona el skill por nomb
 - "¿Cuáles son mis derechos procesales como imputado?"
 - "Defensa por error de tipo invencible"
 - "Procedimiento penal desde investigación hasta sentencia"
+
+**Jurisprudencia Dominicana:**
+- "¿Qué dice la jurisprudencia sobre actos propios?"
+- "Busca sentencias sobre tracto sucesivo registral"
+- "Cómo se aplica el principio de buena fe en contratos"
+- "Doctrina SCJ sobre cosa juzgada y cosa nueva"
+- "Jurisprudencia sobre embargos con vicio de notificación"
+- "¿Cómo se calcula la responsabilidad civil según SCJ?"
+- "Cita jurisprudencial en formato CENDIJ para enriquecimiento injusto"
