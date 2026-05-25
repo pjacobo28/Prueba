@@ -42,7 +42,7 @@ Official Anthropic implementation of skills for Claude.
 
 ## Custom Skills
 
-### Derecho Civil Dominicano
+### 1. Derecho Civil Dominicano
 Guía completa del Código Civil dominicano con jurisprudencia.
 
 **Cobertura:**
@@ -57,11 +57,33 @@ Guía completa del Código Civil dominicano con jurisprudencia.
 - Doctrina de actos propios, buena fe contractual, imprevisión de circunstancias
 - Cheatsheet de obligaciones con plazos y procedimientos
 
+### 2. Derecho Registral e Inmobiliario Dominicano
+Sistema Torrens y operaciones de registro inmobiliario (Ley 108-05).
+
+**Cobertura:**
+- **Sistema Torrens:** Principios de especialidad, legalidad, legitimidad, publicidad
+- **Titulación y asientos registrales:** Inscripción, hipotecas, embargos, gravámenes
+- **Tracto sucesivo (Art. 31 Res. 788-2022):** Prohibición de inscribir sin antecesor
+- **Embargos retentivos:** Medidas cautelares inmobiliarias
+- **Impugnación de inscripciones:** Acciones de nulidad, recursos en vía de amparo
+- **Condominio (Ley 5038):** Régimen de propiedad horizontal
+- **Jurisprudencia SCJ:** Sentencias sobre Sistema Torrens y prioridad registral
+
+**Características:**
+- 8 capítulos temáticos on-demand (Sistema Torrens, Titulación, Tracto Sucesivo, Embargos, Medidas Cautelares, Condominio, Impugnaciones, Jurisprudencia)
+- Glosario de 20+ términos clave con jurisprudencia
+- Cheatsheet de operaciones críticas (inscripción, embargo, cancelación, sentencia de tierras)
+- Conexiones estratégicas: demanda de nulidad, embargo retentivo, hipoteca y ejecución
+- Alertas prácticas sobre tracto sucesivo, prioridad registral, caducidad automática, fe pública
+- Referencias a Ley 108-05, Resoluciones 787-789/2022, CPC anotado
+
 ## Estructura del Proyecto
 
 ```
 skills/
-  ├── derecho-civil-dominicano/      # Custom legal skill
+  ├── derecho-civil-dominicano/          # Código Civil
+  │   └── SKILL.md
+  ├── inmobiliario-dominicano/           # Ley 108-05 + Sistema Torrens
   │   └── SKILL.md
   ├── ... (superpowers skills)
   └── ... (other skills)
@@ -73,3 +95,6 @@ Los skills se cargan automáticamente en Claude Code. Menciona el skill por nomb
 - "Usa el skill de derecho civil dominicano para analizar este contrato"
 - "Aplicar reglas de obligaciones contractuales"
 - "¿Cuál es el régimen matrimonial por defecto en RD?"
+- "Análisis de tracto sucesivo en esta inscripción"
+- "¿Cómo funciona un embargo retentivo inmobiliario?"
+- "Explica la prioritariedad registral en DR"
