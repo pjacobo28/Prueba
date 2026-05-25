@@ -77,24 +77,56 @@ Sistema Torrens y operaciones de registro inmobiliario (Ley 108-05).
 - Alertas prácticas sobre tracto sucesivo, prioridad registral, caducidad automática, fe pública
 - Referencias a Ley 108-05, Resoluciones 787-789/2022, CPC anotado
 
+### 3. Derecho Penal Dominicano
+Código Penal (arts. 1-483) + Ley 97-2025 (Código Procesal Penal).
+
+**Cobertura:**
+- **Teoría del Delito:** Tipicidad, antijuricidad, culpabilidad, imputabilidad, punibilidad
+- **Libro I - Disposiciones Generales:** Clasificación delitos, grados ejecución (tentativa, frustración, consumación), participación criminal (autores, cómplices, instigadores)
+- **Libro II - Delitos Contra la Persona:** Homicidio, violación, lesiones, consentimiento en delitos sexuales
+- **Libro III - Delitos Contra la Propiedad:** Robo, hurto, estafa, diferenciación por violencia/engaño
+- **Delitos Especiales:** Blanqueo de capitales (Ley 155-17), corrupción, soborno, malversación, drogas
+- **Procedimiento Penal (Ley 97-2025):** Investigación preliminar, etapa preparatoria, juicio oral, recursos, derechos procesales, medidas cautelares
+
+**Características:**
+- 3 capas integradas: teoría del delito, derecho sustantivo, procedimiento penal
+- Elementos constitutivos de cada delito con jurisprudencia SCJ
+- 5 fases procedimentales: investigación, etapa preparatoria, juicio oral, sentencia, recursos
+- Derechos procesales del imputado (presunción inocencia, defensa técnica, silencio, confrontación testigos)
+- Jurisprudencia pivotal: tipicidad, error de tipo, presunción inocencia, cosa juzgada, debido proceso
+- Cheatsheet de 7 defensas penales (elemento tipo, error, justificación, imputabilidad, prescripción, cosa juzgada)
+
 ## Estructura del Proyecto
 
 ```
 skills/
-  ├── derecho-civil-dominicano/          # Código Civil
+  ├── derecho-civil-dominicano/          # Código Civil (4 libros)
   │   └── SKILL.md
   ├── inmobiliario-dominicano/           # Ley 108-05 + Sistema Torrens
   │   └── SKILL.md
-  ├── ... (superpowers skills)
-  └── ... (other skills)
+  ├── derecho-penal-dominicano/          # Código Penal + CPP
+  │   └── SKILL.md
+  ├── ... (superpowers skills - 14)
+  └── ... (anthropic skills reference)
 ```
 
 ## Cómo usar
 
 Los skills se cargan automáticamente en Claude Code. Menciona el skill por nombre o su tema:
+
+**Derecho Civil:**
 - "Usa el skill de derecho civil dominicano para analizar este contrato"
 - "Aplicar reglas de obligaciones contractuales"
 - "¿Cuál es el régimen matrimonial por defecto en RD?"
+
+**Derecho Inmobiliario:**
 - "Análisis de tracto sucesivo en esta inscripción"
 - "¿Cómo funciona un embargo retentivo inmobiliario?"
 - "Explica la prioritariedad registral en DR"
+
+**Derecho Penal:**
+- "¿Cuáles son los elementos del tipo penal de robo?"
+- "Analiza la culpabilidad en este caso de homicidio"
+- "¿Cuáles son mis derechos procesales como imputado?"
+- "Defensa por error de tipo invencible"
+- "Procedimiento penal desde investigación hasta sentencia"
