@@ -1,13 +1,13 @@
 # Prueba
 
-Project with Claude Code plugins and skills installed.
+Proyecto con plugins y skills para Claude Code.
 
-## Plugins Installed
+## Plugins Instalados
 
 ### 1. Claude-Mem
 Persistent memory compression system for Claude Code.
 
-**Features:**
+**Características:**
 - **Persistent Memory** - Context survives across sessions
 - **Progressive Disclosure** - Layered memory retrieval with token cost visibility
 - **Skill-Based Search** - Query your project history with mem-search skill
@@ -15,34 +15,61 @@ Persistent memory compression system for Claude Code.
 - **Privacy Control** - Use `<private>` tags to exclude sensitive content from storage
 - **Context Configuration** - Fine-grained control over what context gets injected
 
-**Repository:** https://github.com/thedotmack/claude-mem
+**Repositorio:** https://github.com/thedotmack/claude-mem
 
 ### 2. Superpowers
 Complete software development workflow for coding agents.
 
-**Features:**
+**Características:**
 - **Specification Refinement** - Asks what you're trying to do before jumping to code
 - **Design Review** - Shows design in readable chunks for approval
 - **Implementation Planning** - Clear plan following TDD and YAGNI principles
 - **Subagent-Driven Development** - Agents work autonomously through tasks with review
 - **Composable Skills** - Set of reusable skills for common development tasks
 
-**Repository:** https://github.com/obra/superpowers
+**Repositorio:** https://github.com/obra/superpowers
 
 ### 3. Anthropic Skills
-Official Anthropic implementation of skills for Claude - a comprehensive library of pre-built skills for various tasks.
+Official Anthropic implementation of skills for Claude.
 
-**Available Skills (17):**
+**Skills Disponibles (17):**
 - **Creative & Design**: algorithmic-art, brand-guidelines, canvas-design, frontend-design, slack-gif-creator, theme-factory
 - **Development & Technical**: claude-api, mcp-builder, skill-creator, webapp-testing, web-artifacts-builder
 - **Enterprise & Communication**: internal-comms, doc-coauthoring
 - **Document Skills**: docx, pdf, pptx, xlsx
 
-**Features:**
-- Pre-built skills for immediate use
-- Open source (Apache 2.0) + source-available document skills
-- Self-contained skills with instructions and metadata
-- Pattern reference for creating custom skills
-- Full agent skills standard specification
+**Repositorio:** https://github.com/anthropics/skills
 
-**Repository:** https://github.com/anthropics/skills
+## Custom Skills
+
+### Derecho Civil Dominicano
+Guía completa del Código Civil dominicano con jurisprudencia.
+
+**Cobertura:**
+- **Libro I:** Personas (capacidad, matrimonio, divorcio, filiación, patria potestad)
+- **Libro II:** Bienes (propiedad, posesión, usucapión)
+- **Libro III:** Obligaciones (contrato, responsabilidad civil, enriquecimiento sin causa)
+- **Libro IV:** Sucesión hereditaria (orden de sucesión, legítima, legados)
+
+**Características:**
+- Jurisprudencia SCJ e interpretación legal
+- Triggers automáticos para temas: contrato, obligación, responsabilidad civil, matrimonio, divorcio, filiación, patria potestad, sucesión, propiedad, posesión, derechos reales, prescripción, usucapión, enriquecimiento sin causa, actos propios, buena fe
+- Doctrina de actos propios, buena fe contractual, imprevisión de circunstancias
+- Cheatsheet de obligaciones con plazos y procedimientos
+
+## Estructura del Proyecto
+
+```
+skills/
+  ├── derecho-civil-dominicano/      # Custom legal skill
+  │   └── SKILL.md
+  ├── ... (superpowers skills)
+  └── ... (other skills)
+```
+
+## Cómo usar
+
+Los skills se cargan automáticamente en Claude Code. Menciona el skill por nombre o su tema:
+- "Usa el skill de derecho civil dominicano para analizar este contrato"
+- "Aplicar reglas de obligaciones contractuales"
+- "¿Cuál es el régimen matrimonial por defecto en RD?"
